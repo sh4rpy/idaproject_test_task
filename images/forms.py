@@ -10,7 +10,6 @@ from .url_validators import valid_url_mimetype, valid_url_extension
 
 class ImageUploadForm(forms.ModelForm):
     """Форма загрузки изображения"""
-
     class Meta:
         model = Image
         fields = ('url', 'original_image',)
