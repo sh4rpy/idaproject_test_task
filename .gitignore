@@ -1,0 +1,12 @@
+images/migrations
+
+venv/
+*.env
+.env
+
+.idea
+.DS_Store
+media/
+*/__pycache__/
+
+db.sqlite3
