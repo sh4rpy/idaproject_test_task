@@ -9,7 +9,7 @@
 Склонируйте репозиторий:
 
 ```bash
-git clone https://github.com/sh4rpy/idaproject_test_task.gi
+git clone https://github.com/sh4rpy/idaproject_test_task.git
 ```
 
 Создайте файл .env в одной директории с файлом settings.py. Запишите в него скопированный ключ с [сайта генерации ключей.](https://djecrety.ir/) В итоге .env должен выглядеть так:
