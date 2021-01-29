@@ -7,6 +7,8 @@ venv/
 .idea
 .DS_Store
 media/
-*/__pycache__/
+__pycache__
+images/__pycache__
+tests/__pycache__
 
 db.sqlite3

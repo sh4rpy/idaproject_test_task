@@ -10,12 +10,14 @@ from .utils import resize_image
 
 
 class ImageListView(ListView):
+    """Страница со списком всех изображений"""
     model = Image
     context_object_name = 'images'
     template_name = 'index.html'
 
 
 class ImageCreateView(CreateView):
+    """Страница добавления изображения"""
     form_class = ImageUploadForm
     template_name = 'images/upload.html'
 
@@ -30,6 +32,7 @@ class ImageCreateView(CreateView):
 
 
 class ImageResizeView(FormView):
+    """Страница изменения размера изображения"""
     form_class = ImageResizeForm
     template_name = 'images/update.html'
     success_url = reverse_lazy('update')

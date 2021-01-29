@@ -10,7 +10,9 @@ class Image(models.Model):
     original_image = models.ImageField(
         upload_to='images/original/', verbose_name='Файл', blank=True
     )
-    resized_image = models.ImageField(upload_to='images/resized/', blank=True)
+    resized_image = models.ImageField(
+        upload_to='images/resized/', verbose_name='Измененный файл', blank=True
+    )
     url = models.URLField(verbose_name='Ссылка', blank=True)
 
     @property
