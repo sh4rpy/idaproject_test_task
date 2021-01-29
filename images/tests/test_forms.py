@@ -11,7 +11,7 @@ from ..models import Image
 class TestUploadForm(TestCase):
     @classmethod
     def setUpClass(cls):
-        """Создаем временуую папку для медиафайов"""
+        """Создаем временуую папку для медиафайлов"""
         super().setUpClass()
         settings.MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
@@ -62,3 +62,37 @@ class TestUploadForm(TestCase):
         self.assertEqual(Image.objects.count(), self.image_count, 'Запись создалась, а не должна')
         self.assertFormError(response, 'form', None, 'Хотя бы одно поле должно быть заполнено',
                              'Форма не содержит такой ошибки')
+
+
+class TestResizeForm(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        """Создаем временуую папку для медиафайлов"""
+        super().setUpClass()
+        settings.MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
+
+    @classmethod
+    def tearDownClass(cls):
+        """Удаляет временную папку"""
+        shutil.rmtree(settings.MEDIA_ROOT, ignore_errors=True)
+        super().tearDownClass()
+
+    def setUp(self):
+        self.client = Client()
+        with open('images/tests/test.png', 'rb') as fp:
+            self.client.post(reverse('upload'), data={'original_image': fp})
+        self.image = Image.objects.first()
+
+    def test_resize_image_height(self):
+        """Проверяем, что высота изображения меняется"""
+        self.client.post(reverse('update', kwargs={'pk': self.image.pk}),
+                         data={'height': 100})
+        resized_image = Image.objects.first()
+        self.assertEqual(resized_image.resized_image.height, 100, 'Высота не изменилась')
+
+    def test_resize_image_width(self):
+        """Проверяем, что ширина изображения меняется"""
+        self.client.post(reverse('update', kwargs={'pk': self.image.pk}),
+                         data={'height': 100})
+        resized_image = Image.objects.first()
+        self.assertEqual(resized_image.resized_image.height, 100, 'Ширина не изменилась')

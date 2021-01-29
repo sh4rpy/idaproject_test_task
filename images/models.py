@@ -20,7 +20,7 @@ class Image(models.Model):
         """Возвращает имя файла"""
         return os.path.basename(self.resized_image.name)
 
-    def get_image_from_url(self):
+    def _get_image_from_url(self):
         """Загружает изображение через URL, если отсутсвует локальное изображение"""
         str_url = str(self.url)
         if self.url and not self.original_image:
@@ -32,5 +32,5 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         # здесь расширяем родительский метод возможностью сохранение через URL
-        self.get_image_from_url()
+        self._get_image_from_url()
         super().save(*args, **kwargs)

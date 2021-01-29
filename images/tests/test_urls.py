@@ -11,7 +11,7 @@ from ..models import Image
 class TestUrls(TestCase):
     @classmethod
     def setUpClass(cls):
-        """Создаем временуую папку для медиафайов"""
+        """Создаем временуую папку для медиафайлов"""
         super().setUpClass()
         settings.MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
