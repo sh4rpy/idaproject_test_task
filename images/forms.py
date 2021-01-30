@@ -16,16 +16,15 @@ class ImageUploadForm(forms.ModelForm):
 
     def clean(self):
         """Проверка, что только одно поле заполнено"""
-        cleaned_data = self.cleaned_data
-        from_url = cleaned_data.get('url')
-        from_computer = cleaned_data.get('original_image')
+        from_url = self.cleaned_data.get('url')
+        from_computer = self.cleaned_data.get('original_image')
         if from_url and from_computer:
             raise ValidationError(
                 'Невозможно одновременно загрузить изображение и по ссылке, и с компьютера'
             )
         if not from_url and not from_computer:
             raise ValidationError('Хотя бы одно поле должно быть заполнено')
-        return cleaned_data
+        return self.cleaned_data
 
     def clean_url(self):
         """Проверка правильности ссылки"""
