@@ -11,13 +11,13 @@ from ..models import Image
 class TestUploadForm(TestCase):
     @classmethod
     def setUpClass(cls):
-        """Создаем временуую папку для медиафайлов"""
+        """Создаем временную папку для медиафайлов"""
         super().setUpClass()
         settings.MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
     @classmethod
     def tearDownClass(cls):
-        """Удаляет временную папку"""
+        """Удаляем временную папку"""
         shutil.rmtree(settings.MEDIA_ROOT, ignore_errors=True)
         super().tearDownClass()
 
@@ -39,7 +39,7 @@ class TestUploadForm(TestCase):
 
     def test_upload_image_with_wrong_form_data(self):
         """
-        Проверяем, что при отправке невалидной форме
+        Проверяем, что при отправке невалидной формы
         запись не создается и возбуждается ошибка
         """
         with open('images/tests/test.png', 'rb') as fp:
@@ -53,7 +53,7 @@ class TestUploadForm(TestCase):
 
     def test_upload_image_with_empty_form_data(self):
         """
-        Проверяем, что при отправке пустой форме
+        Проверяем, что при отправке пустой формы
         запись не создается и возбуждается ошибка
         """
         response = self.client.post(
@@ -67,13 +67,13 @@ class TestUploadForm(TestCase):
 class TestResizeForm(TestCase):
     @classmethod
     def setUpClass(cls):
-        """Создаем временуую папку для медиафайлов"""
+        """Создаем временную папку для медиафайлов"""
         super().setUpClass()
         settings.MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
     @classmethod
     def tearDownClass(cls):
-        """Удаляет временную папку"""
+        """Удаляем временную папку"""
         shutil.rmtree(settings.MEDIA_ROOT, ignore_errors=True)
         super().tearDownClass()
 

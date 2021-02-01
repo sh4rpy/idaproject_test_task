@@ -11,13 +11,13 @@ from ..models import Image
 class TestUrls(TestCase):
     @classmethod
     def setUpClass(cls):
-        """Создаем временуую папку для медиафайлов"""
+        """Создаем временную папку для медиафайлов"""
         super().setUpClass()
         settings.MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
     @classmethod
     def tearDownClass(cls):
-        """Удаляет временную папку"""
+        """Удаляем временную папку"""
         shutil.rmtree(settings.MEDIA_ROOT, ignore_errors=True)
         super().tearDownClass()
 
@@ -28,7 +28,7 @@ class TestUrls(TestCase):
         self.image = Image.objects.first()
 
     def test_availability_of_all_pages(self):
-        """Проверяет доступность всех страниц"""
+        """Проверяем доступность всех страниц"""
         urls = {
             '/': reverse('index'),
             'upload': reverse('upload'),
